@@ -2,14 +2,11 @@ package com.epam.training.page;
 
 import com.epam.training.model.EmailAddress;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class EmailYourEstimatePage extends AbstractPage{
 
@@ -18,14 +15,9 @@ public class EmailYourEstimatePage extends AbstractPage{
     @FindBy(xpath = "//button[contains(@ng-click, 'emailQuote.emailQuote')]")
     private WebElement sendEmailButton;
 
-    public EmailYourEstimatePage(WebDriver webDriver){
-        super(webDriver);
+    public EmailYourEstimatePage(){
+        super();
         PageFactory.initElements(webDriver, this);
-    }
-
-    @Override
-    protected AbstractPage openPage() {
-        return this;
     }
 
     public EmailYourEstimatePage fillFormAndSubmit(EmailAddress emailAddress){
@@ -37,8 +29,32 @@ public class EmailYourEstimatePage extends AbstractPage{
         new WebDriverWait(webDriver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions
                         .presenceOfAllElementsLocatedBy(By.xpath("//input[contains(@ng-model, 'email')]")));
+
         inputEmail.sendKeys(emailAddress.getRecepientEmailAddress());
         sendEmailButton.click();
+        return this;
+    }
+
+    @Override
+    public EmailYourEstimatePage openNewTab() {
+        super.openNewTab();
+        return this;
+    }
+
+    @Override
+    public EmailYourEstimatePage switchToNewTab() {
+        super.switchToNewTab();
+        return this;
+    }
+
+    @Override
+    public EmailYourEstimatePage switchToDefaultTab() {
+        super.switchToDefaultTab();
+        return this;
+    }
+
+    @Override
+    protected EmailYourEstimatePage openPage() {
         return this;
     }
 }

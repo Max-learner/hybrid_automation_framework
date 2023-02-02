@@ -29,7 +29,7 @@ public class BrowserDriver {
     }
 
     public static void closeWebdriver(){
-        webDriver.quit();
+//        webDriver.quit();
         webDriver = null;
     }
 

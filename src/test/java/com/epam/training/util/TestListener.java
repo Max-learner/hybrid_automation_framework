@@ -6,33 +6,25 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.testng.ITestContext;
-import org.testng.ITestListener;
-import org.testng.ITestResult;
+import org.testng.*;
 
 import java.io.File;
 import java.io.IOException;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class TestListener implements ITestListener {
+public class TestListener implements ITestListener, IConfigurationListener {
 
     private Logger logger = LogManager.getRootLogger();
 
-    public void onTestStart(ITestResult iTestResult){}
-    public void onTestSuccess(ITestResult iTestResult){}
+    @Override
+    public void onConfigurationFailure(ITestResult tr, ITestNGMethod tm) {
+        saveScreenshot();;
+    }
+
     public void onTestFailure(ITestResult iTestResult) {
-        saveScreenshot();
-    }
-    @Override
-    public void onTestSkipped(ITestResult result) {
-    }
-    @Override
-    public void onStart(ITestContext context) {
-    }
-    @Override
-    public void onFinish(ITestContext context) {
-    }
+    saveScreenshot();
+}
 
     private void saveScreenshot(){
         File screenShot = ((TakesScreenshot) BrowserDriver
@@ -40,13 +32,14 @@ public class TestListener implements ITestListener {
                 .getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(screenShot, new File(".//target/screenshots/"
-                    + getCurrentTimeAsAtring() +
+                    + getCurrentTimeAsString() +
                     ".png"));
         } catch (IOException e) {
             logger.error("Failed to save screenshot: " + e.getLocalizedMessage());
         }
     }
-    private String  getCurrentTimeAsAtring(){
+
+    private String getCurrentTimeAsString(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd_HH-mm-ss");
         return ZonedDateTime.now().format(formatter);
     }

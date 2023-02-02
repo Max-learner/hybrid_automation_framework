@@ -1,14 +1,12 @@
 package com.epam.training.page;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.List;
 
 public class EmailServicePage extends AbstractPage{
@@ -37,15 +35,9 @@ public class EmailServicePage extends AbstractPage{
     @FindBy(xpath = "//div[@id='mail']/div//h3[contains(text(), 'USD')]")
     private WebElement receivedEstimatedTotalCost;
 
-    public EmailServicePage(WebDriver webDriver){
-        super(webDriver);
+    public EmailServicePage(){
+        super();
         PageFactory.initElements(webDriver, this);
-    }
-
-    @Override
-    protected AbstractPage openPage() {
-        webDriver.navigate().to(HOMEPAGE_URL);
-        return this;
     }
 
     public EmailServicePage openInbox(){
@@ -60,6 +52,7 @@ public class EmailServicePage extends AbstractPage{
 
         return this;
     }
+
     public EmailServicePage writeAndSendNewMessage(String emailSubject, String emailText){
         writeNewMessageButton.click();
         WebElement ifmail = webDriver.findElement(By.id("ifmail"));
@@ -73,14 +66,11 @@ public class EmailServicePage extends AbstractPage{
         sendNewMessageButton.click();
         return this;
     }
-    public EmailServicePage setRecepientEmailAddress(String recepientEmailAddress) {
-        this.recepientEmailAddress = recepientEmailAddress;
-        return this;
-    }
 
-    public String getEmail(){
+    public String getEmailAddress(){
         return emailAddress.getText();
     }
+
     public EmailServicePage refreshInbox() throws InterruptedException {
         List<WebElement> searchResult = webDriver
                 .findElements(By.xpath("//button[@onclick='g(this);']"));
@@ -96,12 +86,12 @@ public class EmailServicePage extends AbstractPage{
            Thread.sleep(1000);
            webDriver.switchTo().defaultContent();
         }
-//        System.out.println(searchResult.size());
         new WebDriverWait(webDriver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions
                         .presenceOfAllElementsLocatedBy(By.xpath("//iframe[@id='ifmail']")));
         return this;
     }
+
     public String getReceivedMessageText(){
         WebElement ifmail = webDriver.findElement(By.xpath("//iframe[@id='ifmail']"));
         webDriver.switchTo().frame(ifmail);
@@ -112,6 +102,7 @@ public class EmailServicePage extends AbstractPage{
         webDriver.switchTo().defaultContent();
         return receivedText;
     }
+
     public String getReceivedEstimatedTotalCost(){
         WebElement ifmail = webDriver.findElement(By.xpath("//iframe[@id='ifmail']"));
         webDriver.switchTo().frame(ifmail);
@@ -121,5 +112,34 @@ public class EmailServicePage extends AbstractPage{
         String receivedCost = receivedEstimatedTotalCost.getText();
         webDriver.switchTo().defaultContent();
         return receivedCost;
+    }
+
+    @Override
+    protected EmailServicePage openPage() {
+        webDriver.navigate().to(HOMEPAGE_URL);
+        return this;
+    }
+
+    @Override
+    public EmailServicePage openNewTab() {
+        super.openNewTab();
+        return this;
+    }
+
+    @Override
+    public EmailServicePage switchToNewTab() {
+        super.switchToNewTab();
+        return this;
+    }
+
+    @Override
+    public EmailServicePage switchToDefaultTab() {
+        super.switchToDefaultTab();
+        return this;
+    }
+
+    public EmailServicePage setRecepientEmailAddress(String recepientEmailAddress) {
+        this.recepientEmailAddress = recepientEmailAddress;
+        return this;
     }
 }

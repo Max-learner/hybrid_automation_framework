@@ -30,7 +30,7 @@ public class SearchQuery {
         if (o == null || getClass() != o.getClass()) return false;
         if (!(o instanceof SearchQuery)) {return false;}
         SearchQuery query = (SearchQuery) o;
-        return Objects.equals(query.getSearchQuery(), getSearchQuery());
+        return Objects.equals(query.getSearchQuery(), searchQuery);
     }
 
     @Override
