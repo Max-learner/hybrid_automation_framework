@@ -29,7 +29,7 @@ public class VirtualMachineDataCreator {
                 TestDataReader.getTestData(TESTDATA_DATA_CENTER_LOCATION),
                 TestDataReader.getTestData(TESTDATA_COMMITED_USAGE_TERM));
     }
-    //new service method below
+
     public static VirtualMachineData getVirtualMachineDataFromResults() {
 
         CalculationResultsPage calculationResultsPage = new CalculationResultsPage();

@@ -12,7 +12,7 @@ public abstract class AbstractPage {
     protected WebDriver webDriver;
 
     protected final Duration WAIT_TIMEOUT_SECONDS = Duration.ofSeconds(10);
-    // инициализировать драйвер
+
     protected AbstractPage(){
         this.webDriver = BrowserDriver.getWebDriver();;
     }

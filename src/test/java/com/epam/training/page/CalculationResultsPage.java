@@ -31,7 +31,7 @@ public class CalculationResultsPage extends AbstractPage{
         PageFactory.initElements(webDriver, this);
     }
 
-    public EmailYourEstimatePage openEmailYourEstimatePage() throws InterruptedException {
+    public EmailYourEstimatePage openEmailYourEstimatePage() {
         emailEstimateButton.click();
         new WebDriverWait(webDriver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions
@@ -41,20 +41,6 @@ public class CalculationResultsPage extends AbstractPage{
                         .presenceOfAllElementsLocatedBy(By.xpath("//button[contains(@ng-click, 'emailQuote.emailQuote')]")));
         return new EmailYourEstimatePage();
     }
-
-    // remove to services
-//    public VirtualMachineData getVirtualMachineDataFromResults() {
-//
-//        VirtualMachineData calculatedVirtualMachineData = new VirtualMachineData();
-//
-//        calculatedVirtualMachineData.setDataCenterLocation(getDataCenterLocation());
-//        calculatedVirtualMachineData.setCommittedUsageTerm(getCommitedUsageTerm());
-//        calculatedVirtualMachineData.setProvisioningModel(getProvisioningModel());
-//        calculatedVirtualMachineData.setMachineType(getMachineType());
-//        calculatedVirtualMachineData.setLocalSSDs(getLocalSSD());
-//
-//        return calculatedVirtualMachineData;
-//    }
 
     public String getDataCenterLocation(){
         return dataCenterLocation.getText();

@@ -57,7 +57,7 @@ public class PricingCalculatorPage extends AbstractPage{
         webDriver.switchTo().frame(outerFrame);
         WebElement iframe = webDriver.findElement(By.id("myFrame"));
         webDriver.switchTo().frame(iframe);
-        // use Strings as parameter
+
         computeEngine.click();
         instancesAmountInput.sendKeys(dataForPricing.getMachinesAmount());
         selectOperatingSystem(dataForPricing.getOperatingSystem());
@@ -81,7 +81,7 @@ public class PricingCalculatorPage extends AbstractPage{
                         .presenceOfAllElementsLocatedBy(By.xpath("//md-content[@ng-if='cloudCartCtrl.showComputeItems']//md-list-item")));
         return new CalculationResultsPage();
     }
-    // use Strings as parameter
+
     public PricingCalculatorPage selectOperatingSystem(String xpathOptionTag){
         operatingSystemSelect.click();
         waitForExpandedDropdownOf(operatingSystemSelect);

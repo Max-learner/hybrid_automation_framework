@@ -34,12 +34,7 @@ public class GoogleCloudPlatformCalculatorTest extends TestEnvironmentSetup {
 
     @Test (description = "Check calculation data is set properly")
     public void pricingCalculatorResultsCalculationTest() {
-        //rewrite method getVirtualMachineDataFromResults
-//        softAssert.assertEquals(
-//                calculationResultsPage.getVirtualMachineDataFromResults(),
-//                virtualMachineDataForPricing,
-//                "Virtual Machine data in calculation is not equal to input"
-//                );
+
         softAssert.assertEquals(
                 VirtualMachineDataCreator.getVirtualMachineDataFromResults(),
                 virtualMachineDataForPricing,
